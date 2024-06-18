@@ -8,7 +8,7 @@ win = pygame.display.set_mode((width, height))
 
 pygame.display.set_caption("ex 1 i 2")
 
-# Deklarowanie kolorów
+# deklarowanie kolorów
 CZERWONY = (255, 0, 0)
 ZIELONY = (0, 255, 0)
 ZOLTY = (255, 255, 0)
@@ -24,7 +24,6 @@ win.fill(CZARNY)
 r = 150
 middle = (width // 2, height // 2)
 
-
 def draw_angle(angle_degrees):
     size = 100
     center = (width // 2, height // 2)
@@ -38,45 +37,42 @@ def draw_angle(angle_degrees):
 
     return pygame.draw.polygon(win, BIALY, points, 2)
 
-
 def handle_key_event(event):
     win.fill(CZARNY)
-    draw_angle(16)  # Szesnastokąt
+    draw_angle(14)  # czternastokąt
     changed = None
 
-    match event.key:
-        case pygame.K_1:
-            changed = pygame.transform.scale(win, (width * 0.35, height * 0.35))
-        case pygame.K_2:
-            changed = pygame.transform.rotate(win, 45)
-        case pygame.K_3:
-            changed = pygame.transform.flip(win, 0, 1)
-        case pygame.K_4:
-            changed = pygame.transform.scale_by(win, (0.35, 1))
-            changed = pygame.transform.rotozoom(changed, 45, 1)
-        case pygame.K_5:
-            changed = pygame.transform.scale(win, (width, int(height * 0.35)))
-        case pygame.K_6:
-            changed = pygame.transform.scale_by(win, (0.35, 1))
-            changed = pygame.transform.rotozoom(changed, 180, 1)
-        case pygame.K_7:
-            changed = pygame.transform.scale_by(win, (0.5, 1))
-            changed = pygame.transform.flip(changed, 1, 0)
-        case pygame.K_8:
-            changed = pygame.transform.scale_by(win, (1, 0.4))
-            changed = pygame.transform.rotate(changed, -20)
-        case pygame.K_9:
-            changed = pygame.transform.scale_by(win, (0.35, 1))
-            changed = pygame.transform.rotozoom(changed, 90, 1)
-        case _:
-            win.fill(BIALY)
-            pygame.draw.circle(win, CZARNY, (width // 2, height // 2), 100)
-            pygame.draw.rect(win, ZOLTY, (250, 250, 100, 100))
+    if event.key == pygame.K_1:
+        changed = pygame.transform.scale(win, (int(width * 0.35), int(height * 0.35)))
+    elif event.key == pygame.K_2:
+        changed = pygame.transform.rotate(win, 45)
+    elif event.key == pygame.K_3:
+        changed = pygame.transform.flip(win, 0, 1)
+    elif event.key == pygame.K_4:
+        changed = pygame.transform.scale_by(win, (0.35, 1))
+        changed = pygame.transform.rotozoom(changed, 45, 1)
+    elif event.key == pygame.K_5:
+        changed = pygame.transform.scale(win, (width, int(height * 0.35)))
+    elif event.key == pygame.K_6:
+        changed = pygame.transform.scale_by(win, (0.35, 1))
+        changed = pygame.transform.rotozoom(changed, 180, 1)
+    elif event.key == pygame.K_7:
+        changed = pygame.transform.scale_by(win, (0.5, 1))
+        changed = pygame.transform.flip(changed, 1, 0)
+    elif event.key == pygame.K_8:
+        changed = pygame.transform.scale_by(win, (1, 0.4))
+        changed = pygame.transform.rotate(changed, -20)
+    elif event.key == pygame.K_9:
+        changed = pygame.transform.scale_by(win, (0.35, 1))
+        changed = pygame.transform.rotozoom(changed, 90, 1)
+    else:
+        win.fill(BIALY)
+        pygame.draw.circle(win, CZARNY, (width // 2, height // 2), 100)
+        pygame.draw.rect(win, ZOLTY, (250, 250, 100, 100))
 
     if changed:
         win.blit(changed, ((width - changed.get_width()) // 2, (height - changed.get_height()) // 2))
         pygame.display.flip()
-
 
 def start():
     run = True
@@ -89,6 +85,5 @@ def start():
                 handle_key_event(event)
 
         pygame.display.update()
-
 
 start()
